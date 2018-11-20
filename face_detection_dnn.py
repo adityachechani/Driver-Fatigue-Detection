@@ -25,15 +25,8 @@ def detectFaceOpenCVDnn(net, frame):
 if __name__ == "__main__" :
 
     path = "models/"
-    # OpenCV DNN supports 2 networks.
-    # 1. FP16 version of the original caffe implementation ( 5.4 MB )
-    # 2. 8 bit Quantized version using Tensorflow ( 2.7 MB )
     DNN = "TF"
-    if DNN == "CAFFE":
-        modelFile = path + "res10_300x300_ssd_iter_140000_fp16.caffemodel"
-        configFile = path + "deploy.prototxt"
-        net = cv2.dnn.readNetFromCaffe(configFile, modelFile)
-    else:
+    if DNN == "TF":
         modelFile = path + "opencv_face_detector_uint8.pb"
         configFile = path + "opencv_face_detector.pbtxt"
         net = cv2.dnn.readNetFromTensorflow(modelFile, configFile)
