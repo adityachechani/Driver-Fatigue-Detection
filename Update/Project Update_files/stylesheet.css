@@ -1,0 +1,123 @@
+a {
+color: #0000AA;
+text-decoration: none;
+}
+
+a:visited {
+color: #773300;
+border: none;
+}
+
+a:hover {
+border-bottom: 1px blue dotted;
+}
+
+h1 {
+	color: #b62626;
+	font: normal 22px/27px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+}
+h2 {
+	color: #b62626;
+	font: normal 18px/22px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+}
+h3 {
+	font: normal 15px/18px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+}
+h4 {
+  	font: normal 13px/18px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+}
+h5 {
+	font: normal 11px/18px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+}
+
+p {
+	margin-bottom: 18px;
+}
+strong {
+	font-weight: bold;
+}
+em {
+	font-style: italic;
+}
+
+
+blockquote {
+	font: 13px/13px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+	margin-bottom: 18px;
+	padding: 0 0;
+}
+
+/* Navigation is based on 6 menu items, adjust width and padding to accomodate more or less */
+#navigation {
+	background: #fff url(images/bg_navigation.png) top left repeat-x;
+	clear: both;
+	font: normal 14px/18px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;	
+	height: 44px;
+	width: 828px;
+	margin: 0 0 18px 0;
+	padding: 0;
+}
+#navigation ul {
+	color: #6d6666;
+	display: block;
+	height: 18px;
+	margin: 0;	
+	padding: 0;
+	width: 828px;
+}
+#navigation ul li {
+	display: inline;
+	float: left;
+	text-align: center;
+	width: 140px;
+}
+#navigation ul li.first, #navigation ul li.last {
+	width: 134px;
+}
+#navigation ul li a {
+	display: block;
+	color: black;
+	height: 18px;
+	margin: 0;	
+	padding: 13px 0 12px 0;
+	text-decoration: none;
+}
+#navigation ul li a:hover {
+	color: #b62626;
+	text-decoration: none;
+        border-bottom: none;
+}
+
+#navigation ul li.selected a {
+	color: #b62626;
+	text-decoration: none;
+}
+#navigation ul li.selected a:hover {
+	text-decoration: underline;
+}
+
+
+body {
+	
+	border: 0; /* Removes the border around the viewport in old versions of IE */
+	color: #000000;
+	font: normal 13px/18px 'Trebuchet MS', Helvetica, Arial, sans-serif, serif;
+
+	min-width: 800px;
+	padding: 0;
+	width: 90%;
+}
+
+
+#cameramouse {
+	font: normal 18px/20px 'Trebuchet MS', Helvetica, Arial,
+	sans-serif, bserif;	
+        padding: 0;
+        color: #992222;
+}
+
