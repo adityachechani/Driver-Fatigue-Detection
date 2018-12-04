@@ -1,3 +1,12 @@
+"""
+TODO:
+    - Improve face landmark detection. Probably caused due to lighting changes. How to eliminate the effect of lightinh with minimal computation
+    - Stabilize face landmark points
+    - 
+
+"""
+
+
 import dlib
 import cv2
 import time
@@ -6,11 +15,12 @@ from scipy.spatial import distance as dist
 from threading import Thread
 import playsound
 import queue
+# from light_variability import adjust_gamma
 
 FACE_DOWNSAMPLE_RATIO = 1.5
 RESIZE_HEIGHT = 460
 
-thresh = 0.25
+thresh = 0.28
 modelPath = "models/shape_predictor_70_face_landmarks.dat"
 sound_path = "alarm.wav"
 
@@ -23,10 +33,21 @@ rightEyeIndex = [42, 43, 44, 45, 46, 47]
 blinkCount = 0
 drowsy = 0
 state = 0
-blinkTime = 0.25 #250ms
+blinkTime = 0.2 #250ms
 drowsyTime = 1.2  #1200ms
 ALARM_ON = False
+GAMMA = 1.5
 threadStatusQ = queue.Queue()
+
+invGamma = 1.0/GAMMA
+table = np.array([((i / 255.0) ** invGamma) * 255 for i in range(0, 256)]).astype("uint8")
+
+def gamma_correction(image):
+    return cv2.LUT(image, table)
+
+def histogram_equalization(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    return cv2.equalizeHist(gray) 
 
 def soundAlert(path, threadStatusQ):
     while True:
@@ -148,7 +169,10 @@ while(validFrames < dummyFrames):
                         fy = 1/IMAGE_RESIZE, 
                         interpolation = cv2.INTER_LINEAR)
 
-    landmarks = getLandmarks(frame)
+    adjusted = gamma_correction(frame)
+    # adjusted = histogram_equalization(frame)
+    
+    landmarks = getLandmarks(adjusted)
     timeLandmarks = time.time() - t
 
     if landmarks == 0:
@@ -181,7 +205,10 @@ if __name__ == "__main__":
                                 fy = 1/IMAGE_RESIZE, 
                                 interpolation = cv2.INTER_LINEAR)
 
-            landmarks = getLandmarks(frame)
+            adjusted = gamma_correction(frame)
+            # adjusted = histogram_equalization(frame)
+
+            landmarks = getLandmarks(adjusted)
             if landmarks == 0:
                 validFrames -= 1
                 cv2.putText(frame, "Unable to detect face, Please check proper lighting", (10, 30), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
@@ -217,7 +244,7 @@ if __name__ == "__main__":
             cv2.imshow("Blink Detection Demo", frame)
 
             k = cv2.waitKey(1) 
-            if k == ord('d'):
+            if k == ord('r'):
                 state = 0
                 drowsy = 0
                 ALARM_ON = False
