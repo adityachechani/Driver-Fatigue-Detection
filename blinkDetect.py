@@ -11,7 +11,7 @@ FACE_DOWNSAMPLE_RATIO = 1.5
 RESIZE_HEIGHT = 460
 
 thresh = 0.25
-modelPath = "facial_landmark_data/shape_predictor_70_face_landmarks.dat"
+modelPath = "models/shape_predictor_70_face_landmarks.dat"
 sound_path = "alarm.wav"
 
 detector = dlib.get_frontal_face_detector()
@@ -27,7 +27,7 @@ rEnd = 48
 blinkCount = 0
 drowsy = 0
 state = 0
-blinkTime = 0.25 #400ms
+blinkTime = 0.25 #250ms
 drowsyTime = 1.2  #1200ms
 ALARM_ON = False
 
