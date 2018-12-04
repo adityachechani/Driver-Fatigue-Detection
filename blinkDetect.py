@@ -19,10 +19,10 @@ predictor = dlib.shape_predictor(modelPath)
 
 leftEyeIndex = [36, 37, 38, 39, 40, 41]
 rightEyeIndex = [42, 43, 44, 45, 46, 47]
-lStart = 36
-lEnd = 42
-rStart = 42
-rEnd = 48
+# lStart = 36
+# lEnd = 42
+# rStart = 42
+# rEnd = 48
 
 blinkCount = 0
 drowsy = 0
