@@ -1,0 +1,6 @@
+dlib
+cv2
+numpy
+scipy
+threading
+playsound
