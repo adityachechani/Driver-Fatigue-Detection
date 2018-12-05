@@ -148,7 +148,7 @@ def getLandmarks(im):
     [points.append((p.x, p.y)) for p in predictor(im, newRect).parts()]
     return points
 
-capture = cv2.VideoCapture(1)
+capture = cv2.VideoCapture(0)
 
 for i in range(10):
     ret, frame = capture.read()
