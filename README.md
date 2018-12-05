@@ -24,3 +24,5 @@ the person is either drowsy or sleeping. On the other hand, if the eye reopens a
 discarded.
 
 P.S: Press 'r' key to reset drowsiness alert and 'esc' to exit.
+
+Project still in progress. Next step is to detect driver's gaze direction.
