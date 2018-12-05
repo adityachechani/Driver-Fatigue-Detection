@@ -1,14 +1,18 @@
 # Driver-Fatigue-Detection
-	Detect driver fatique and drowsiness 
 
-### Create a virtual environment and activate it
+### Motivation:
+	The risk, danger and sometimes tragic results of drowsy driving are alarming. The National Highway Traffic Safety Administration conservatively estimates that 100,000 police-reported crashes resulted in an estimated 1,550 deaths, 71,000 injuries, and $12.5 billion in monetary losses due to driver fatigue.
+	This application detects blinks and alerts of the driver's drowsiness. It handles variable lighting conditions and works pretty well in day as well as in the dark.
+	It uses histogram equalization and gamma correction to eliminate the effect of lighting.
+
+### Create a virtual environment and activate it:
 	virtualenv -p python env
-	\env\Scripts\activate
+	/env/Scripts/activate
 
 ### Install the required packages to run the project:
-	python -m pip install -r .\requirements.txt
+	python -m pip install -r requirements.txt
 
-### Run blinkDetect.py
+### Run blinkDetect.py:
 	python blinkDetect.py
 
 
