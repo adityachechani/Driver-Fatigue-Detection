@@ -19,7 +19,7 @@ import queue
 FACE_DOWNSAMPLE_RATIO = 1.5
 RESIZE_HEIGHT = 460
 
-thresh = 0.28
+thresh = 0.3
 modelPath = "models/shape_predictor_70_face_landmarks.dat"
 sound_path = "alarm.wav"
 
@@ -32,7 +32,7 @@ rightEyeIndex = [42, 43, 44, 45, 46, 47]
 blinkCount = 0
 drowsy = 0
 state = 0
-blinkTime = 0.2 #250ms
+blinkTime = 0.15 #150ms
 drowsyTime = 1.0  #1200ms
 ALARM_ON = False
 GAMMA = 1.5
