@@ -1,12 +1,16 @@
 """
 TODO:
-    - Improve face landmark detection. Probably caused due to lighting changes. How to eliminate the effect of lightinh with minimal computation
+    - Improve face landmark detection. Probably caused due to lighting changes. Eliminate the effect of lightinh with minimal computation.
+      Solved by histogram equalization
+
     - Stabilize face landmark points
-    - 
+
+    - Gaze direction
 
 """
 
 import dlib
+import sys
 import cv2
 import time
 import numpy as np
@@ -157,6 +161,7 @@ totalTime = 0.0
 validFrames = 0
 dummyFrames = 100
 
+print("Caliberation in Progress!")
 while(validFrames < dummyFrames):
     validFrames += 1
     t = time.time()
@@ -184,6 +189,13 @@ while(validFrames < dummyFrames):
 
     else:
         totalTime += timeLandmarks
+        # cv2.putText(frame, "Caliberation in Progress", (200, 30), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+        # cv2.imshow("Blink Detection Demo", frame)
+        
+    # if cv2.waitKey(1) & 0xFF == 27:
+    #         sys.exit()
+
+print("Caliberation Complete!")
 
 spf = totalTime/dummyFrames
 print("Current SPF (seconds per frame) is {:.2f} ms".format(spf * 1000))
