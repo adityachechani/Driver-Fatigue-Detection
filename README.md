@@ -22,3 +22,5 @@
 A blink is supposed to last for 300 to 400 milliseconds. So, if the eye remains closed for more than 800-900 ms, we can say that
 the person is either drowsy or sleeping. On the other hand, if the eye reopens after just 100ms, its considered an invalid blink 
 discarded.
+
+P.S: Press 'r' key to reset drowsiness alert and 'esc' to exit.
