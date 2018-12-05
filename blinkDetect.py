@@ -6,7 +6,6 @@ TODO:
 
 """
 
-
 import dlib
 import cv2
 import time
@@ -34,7 +33,7 @@ blinkCount = 0
 drowsy = 0
 state = 0
 blinkTime = 0.2 #250ms
-drowsyTime = 1.2  #1200ms
+drowsyTime = 1.0  #1200ms
 ALARM_ON = False
 GAMMA = 1.5
 threadStatusQ = queue.Queue()
@@ -149,7 +148,7 @@ def getLandmarks(im):
     [points.append((p.x, p.y)) for p in predictor(im, newRect).parts()]
     return points
 
-capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture(1)
 
 for i in range(10):
     ret, frame = capture.read()
@@ -169,9 +168,9 @@ while(validFrames < dummyFrames):
                         fy = 1/IMAGE_RESIZE, 
                         interpolation = cv2.INTER_LINEAR)
 
-    adjusted = gamma_correction(frame)
-    # adjusted = histogram_equalization(frame)
-    
+    # adjusted = gamma_correction(frame)
+    adjusted = histogram_equalization(frame)
+
     landmarks = getLandmarks(adjusted)
     timeLandmarks = time.time() - t
 
@@ -194,6 +193,7 @@ falseBlinkLimit = blinkTime/spf
 print("drowsy limit: {}, false blink limit: {}".format(drowsyLimit, falseBlinkLimit))
 
 if __name__ == "__main__":
+    vid_writer = cv2.VideoWriter('output-low-light-2.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 15, (frame.shape[1],frame.shape[0]))
     while(1):
         try:
             t = time.time()
@@ -205,8 +205,8 @@ if __name__ == "__main__":
                                 fy = 1/IMAGE_RESIZE, 
                                 interpolation = cv2.INTER_LINEAR)
 
-            adjusted = gamma_correction(frame)
-            # adjusted = histogram_equalization(frame)
+            # adjusted = gamma_correction(frame)
+            adjusted = histogram_equalization(frame)
 
             landmarks = getLandmarks(adjusted)
             if landmarks == 0:
@@ -237,11 +237,13 @@ if __name__ == "__main__":
                     thread.start()
 
             else:
-                cv2.putText(frame, "Blinks : {}".format(blinkCount), (0, 400), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0,0,255), 2, cv2.LINE_AA)
+                cv2.putText(frame, "Blinks : {}".format(blinkCount), (460, 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0,0,255), 2, cv2.LINE_AA)
+                # (0, 400)
                 ALARM_ON = False
 
 
             cv2.imshow("Blink Detection Demo", frame)
+            vid_writer.write(frame)
 
             k = cv2.waitKey(1) 
             if k == ord('r'):
@@ -259,5 +261,6 @@ if __name__ == "__main__":
             print(e)
 
     capture.release()
+    vid_writer.release()
     cv2.destroyAllWindows()
 
